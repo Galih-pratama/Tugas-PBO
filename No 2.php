@@ -1,37 +1,65 @@
-<!-- Nama   : Galih Pratama -->
-<!-- NIM    : 20051397083 -->
-<!-- Kelas  : 2020 A - D4 Manajemen Informatika -->
-
 <?php 
 
-class RerataNilai {
-    protected $value, $value2;
-    public function __construct($value, $value2){
-        $this->value = $value;
-        $this->value2 = $value2;
+require_once '../Interface Abstract/Interface.php';
+
+class Airplane implements Flyer {
+    public function takeOff() {
+        return 'Pesawat lepas landas..';
+    }
+    
+    public function land() {
+        return 'Pesawat mendarat';
     }
 
-    public function average($value3 = 0){
-        if ($value3 == 0) {
-            $str = $this->value . ' + ' . $this->value2 . ' / 2 = ';
-            return $str . ($this->value += $this->value2 ) / 2;
-
-        } else {
-            $str ='(' . $this->value . ' + ' . $this->value2 . ' + ' . $this->value2 . ') / 3 = ';
-            return $str . ($this->value += $this->value2 += $value3 ) / 3;
-        }
+    public function fly() {
+        return 'Pesawat dalam perjalanan';
     }
 }
 
-
-class RerataNilai2 extends RerataNilai{
-    public function __construct($value, $value2){
-        parent::__construct($value, $value2);
+class Bird implements Flyer {
+    public function takeOff() {
+        return 'Burung mencari makan';
+    }
+    
+    public function land() {
+        return 'Burung kembali pulang';
     }
 
-    public function average($value3 = 0){
-        return parent::average($value3);
+    public function fly() {
+        return 'Burung terbang';
+    }
+
+    public function buildNest() {
+        return 'Burung membuat sarang';
+    }
+
+    public function layEggs() {
+        return 'Burung bertelur';
     }
 }
 
-?>
+class Superman implements Flyer {
+    public function takeOff() {
+        return 'Superman mengejar Batman';
+    }
+    
+    public function land() {
+        return 'Superman melawan Batman';
+    }
+
+    public function fly() {
+        return 'Superman melancarkan pukulan';
+    }
+
+    public function leapBuilding() {
+        return 'Batman terpental menabrak bangunan pencakar langit';
+    }
+
+    public function stopBullet() {
+        return 'Polisi menembaki superman namun ditangkis';
+    }
+}
+
+$airplane = new Airplane;
+$bird = new Bird;
+$superman = new Superman;

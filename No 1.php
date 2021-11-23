@@ -1,53 +1,37 @@
-<!-- Nama   : Galih Pratama -->
-<!-- NIM    : 20051397083 -->
-<!-- Kelas  : 2020 A - D4 Manajemen Informatika -->
+<?php 
 
-<html lang="en">
-<head>
-    <link rel="stylesheet" type="text/css" href="No 1.css">
-    <title>Praktikum 4</title>
-</head>
-<body>
-<div class="container">
-<h2>Soal 1</h2>
-<!-- Program PHP -->
-<?php
+require_once '../Interface Abstract/Abstract.php';
 
-class Orang{
-    protected $nama,$umur;
-
-    public function __construct($nama,$umur){
-    $this->nama = $nama;
-    $this->umur = $umur;
+class Truck extends Vehicle {
+    public function __construct($maxLoad, $name)
+    {
+        $this->maxLoad = $maxLoad;
+        $this->name = $name;
     }
-}
-
-class Dosen extends Orang{
-    private $nip;
     
-    public function __construct($nama, $umur, $nip){
-    $this->nip = $nip;
-    parent::__construct($nama, $umur);    
-    }
-
-    public function hasil(){
-        return $this->nama . ' berumur ' . $this->umur. ' dengan NIP ' . $this->nip;
+    public function calcFuelNeeds()
+    {
+        $fuel = $this->calcFuelEfficiency();
+        $trip = $this->calcTripDistance();
+        
+        return ceil($fuel /= $trip);
     }
 }
 
-$dosen1 = new Dosen('Galih', 42, 20051397083); 
-$dosen2 = new Dosen('Gale', 50, 20051397050);
-$dosen3 = new Dosen('Galoh', 60, 20051397070);
+class RiverBarge extends Vehicle {
+    public function __construct($maxLoad, $name)
+    {
+        $this->maxLoad = $maxLoad;
+        $this->name = $name;
+    }
 
-echo $dosen1->hasil();
-echo '<br> <br>';
-echo $dosen2->hasil();
-echo '<br> <br>';
-echo $dosen3->hasil();
-echo '<br> <br>';
+    public function calcFuelNeeds()
+    {
+        $fuel = $this->calcFuelEfficiency();
+        $trip = $this->calcTripDistance();
 
-?>
-<!-- Akhir Program PHP -->
-</div>
-</body>
-</html>
+        return ceil($fuel /= $trip);
+    }
+}
+$truck = new Truck(10000, 'Truk');
+$riverBarge = new RiverBarge(15000, 'Perahu');
